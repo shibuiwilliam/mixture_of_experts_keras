@@ -9,10 +9,11 @@ Training phase of the mixture of experts is to train the gating networks to impr
 <br><br>
 This notebook shows a way to use mixture of experts model with deep learning. The objective is to classify images, using Cifar10 and convolution neural netwok. The mixture of experts model takes hierarchical multiple gating networks, to first decide if the input image is artificial object or natural object. Then the next gating network decides importance of each expert models. 
 <br><br>
-There are three expert models:<br>
+There are three expert models:<br><br>
 basic VGG, which is trained to classify all 10 classes <br>
 artificial expert VGG, which is trained only to classify artificial objects, that have a label in 0, 1, 8 and 9 <br>
 natural expert VGG, which is trained only to classify natural objects, that have a label in 2, 3, 4, 5, 6 and 7 <br>
+<br>
 <br>
 <br>
 ## The overview of the mixture of experts model
@@ -20,15 +21,18 @@ natural expert VGG, which is trained only to classify natural objects, that have
 <br>
 
 The first gating network, that decides which way to take, artificial or natural, is a pretrained VGG neural network, to classify the input data.
+<br><br>
+The second gating network layer, consists of two gating networks, decides the importance of each experts. <br>
+The artificial gating network flows classification job to artificial expert VGG and base VGG, only activated when the first gating network decided the input data is an artificial object. 
 <br>
-The second gating network layer, consists of two gating networks, decides the importance of each experts. The artificial gating network flows classification job to artificial expert VGG and base VGG, only activated when the first gating network decided the input data is an artificial object. The natural gating network flows classification job to natural expert VGG and base VGG, only the first gating netword decided as a natural object.
-<br>
+The natural gating network flows classification job to natural expert VGG and base VGG, only the first gating netword decided as a natural object.
+<br><br>
 The classification output is a sum of softmax of expert VGG and base VGG, with importance from previous gating network multiplied.
 <br>
 The notebook uses Keras with Tensorflow backend to implement the mixture of network model for classifying Cifar10.
 <br>
 The Cifar10 consists of 10 classes of images, with label of each class representing the following.
-<br>
+<br><br>
 0 airplane <br>
 1 automobile <br>
 2 bird <br>
