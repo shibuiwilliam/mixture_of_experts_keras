@@ -28,6 +28,12 @@ The artificial gating network flows classification job to artificial expert VGG 
 The natural gating network flows classification job to natural expert VGG and base VGG, only the first gating netword decided as a natural object.
 <br><br>
 The classification output is a sum of softmax of expert VGG and base VGG, with importance from previous gating network multiplied.
+<br><br>
+For instance, if the input image is a cat, then the first gating network identifies it is a natural object, routing to the natural gating network in the second layer gating. The natural gating network predicts importance of expert networks, base VGG and natural expert VGG, in softmax probability. The expert networks infers the image class in softmax, and each of them is multiplied by the importance to finally output the inference.
+<br>
+The routing of the gatings are as follows:
+<br>
+![5.png](./5.png)
 <br>
 The notebook uses Keras with Tensorflow backend to implement the mixture of network model for classifying Cifar10.
 <br>
