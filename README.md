@@ -29,6 +29,7 @@ The natural gating network flows classification job to natural expert VGG and ba
 <br><br>
 The classification output is a sum of softmax of expert VGG and base VGG, with importance from previous gating network multiplied.
 <br><br>
+## Routing the networks
 For instance, if the input image is a cat, then the first gating network identifies it is a natural object, routing to the natural gating network in the second layer gating. The natural gating network predicts importance of expert networks, base VGG and natural expert VGG, in softmax probability. The expert networks infers the image class in softmax, and each of them is multiplied by the importance to finally output the inference.
 <br>
 The routing of the gatings are as follows:
